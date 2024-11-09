@@ -56,7 +56,6 @@
       <div class="breadcrumb-bar">
         <div class="container-fluid">
           <div class="row align-items-center">
-            
             <div class="col-md-12 col-12">
               <nav aria-label="breadcrumb" class="page-breadcrumb">
                 <ol class="breadcrumb">
@@ -68,14 +67,14 @@
                   </li>
                 </ol>
               </nav>
-              <h2 class="breadcrumb-title">Patient Dashboard</h2>{% include 'message.html' %}
+              <h2 class="breadcrumb-title">Patient Dashboard</h2>
+              {% include 'message.html' %}
             </div>
-
           </div>
         </div>
       </div>
       <!-- /Breadcrumb -->
-      
+
       <!-- Page Content -->
       <div class="content">
         <div class="container-fluid">
@@ -175,17 +174,18 @@
                                   </td>
                                   <td>
                                     {{appointment.date}}
-                                    <span class="d-block text-info"
-                                      >{{appointment.time}}</span
-                                    >
+                                    <span class="d-block text-info">{{appointment.time}}</span>
                                   </td>
                                   <td>{{appointment.appointment_type}}</td>
-                                  
-                                  {% if appointment.appointment_type == 'checkup' %}
-                                  <td>{{appointment.doctor.consultation_fee}} BDT</td>
-                                  {% else %}
-                                  <td>{{appointment.doctor.report_fee}} BDT</td>
+                                  <td>
+                                  {% if appointment.appointment_type == 'checkup' %}  {{appointment.doctor.consultation_fee}} BDT
                                   {% endif %}
+                                  {% if appointment.appointment_type != 'checkup' %}  {{appointment.doctor.report_fee}} BDT
+                                  {% endif %}
+                                  {% comment %} {% else %}
+                                  {{appointment.doctor.report_fee}} BDT
+                                  {% endif %} {% endcomment %}
+                                  </td>
                                   <td>
                                     {% if appointment.appointment_status == 'pending' %}
                                     <span class="badge badge-pill bg-warning-light">Pending</span>
@@ -206,7 +206,7 @@
                                     {% endif %}
                                   </td>
 
-                                  <td >
+                                  <td>
                                     <div class="table-action">
                                       <a
                                         href="{% url 'ssl-payment-request' pk=appointment.patient.patient_id id=appointment.id %}"
@@ -215,8 +215,13 @@
                                         <i class="fas fa-dollar-sign"></i> Pay
                                         Now
                                       </a>
-                                      
                                     </div>
+                                  </td>
+                                </tr>
+                                {% empty %}
+                                <tr>
+                                  <td colspan="7" class="text-center">
+                                    No appointments found.
                                   </td>
                                 </tr>
                                 {% endfor %}
@@ -233,7 +238,9 @@
                       <div class="card card-table mb-0">
                         <div class="card-body">
                           <div class="table-responsive">
-                            <table class="table table-hover table-center mb-0 text-center">
+                            <table
+                              class="table table-hover table-center mb-0 text-center"
+                            >
                               <thead>
                                 <tr>
                                   <th>Prescription ID</th>
@@ -248,14 +255,13 @@
                                 {% for prescription in prescription %}
                                 <tr>
                                   <td>
-                                    <a href="javascript:void(0);">{{prescription.prescription_id}}</a>
+                                    <a href="javascript:void(0);"
+                                      >{{prescription.prescription_id}}</a
+                                    >
                                   </td>
                                   <td>{{prescription.doctor.name }}</td>
-                                  
 
                                   <!-- <td><a href="#">dental-test.pdf</a></td> -->
-
-                               
 
                                   <td>
                                     <h2 class="table-avatar">
@@ -270,7 +276,10 @@
                                         />
                                       </a>
                                       <a href="doctor-profile.html"
-                                        >Dr. {{prescription.doctor}}<span>{{prescription.doctor.department_name }}</span></a
+                                        >Dr. {{prescription.doctor}}<span
+                                          >{{prescription.doctor.department_name
+                                          }}</span
+                                        ></a
                                       >
                                     </h2>
                                   </td>
@@ -299,15 +308,15 @@
                       <div class="card card-table mb-0">
                         <div class="card-body">
                           <div class="table-responsive">
-                            <table class="table table-hover table-center mb-0 text-center">
+                            <table
+                              class="table table-hover table-center mb-0 text-center"
+                            >
                               <thead>
                                 <tr>
                                   <th>Report ID</th>
                                   <th>Delivery Date</th>
 
                                   <!-- <th>Attachment</th> -->
-
-                                 
 
                                   <th>Doctor</th>
                                   <th>Action</th>
@@ -317,14 +326,11 @@
                                 {% for report in report %}
                                 <tr>
                                   <td>
-                                    <a href="javascript:void(0);">{{report.report_id}}</a>
+                                    <a href="javascript:void(0);"
+                                      >{{report.report_id}}</a
+                                    >
                                   </td>
                                   <td>{{report.delivery_date }}</td>
-                                  
-
-                                  <!-- <td><a href="#">dental-test.pdf</a></td> -->
-
-                               
 
                                   <td>
                                     <h2 class="table-avatar">
@@ -339,7 +345,10 @@
                                         />
                                       </a>
                                       <a href="doctor-profile.html"
-                                        >Dr.{{report.doctor}}<span>{{report.doctor.department_name }}</span></a
+                                        >Dr.{{report.doctor}}<span
+                                          >{{report.doctor.department_name
+                                          }}</span
+                                        ></a
                                       >
                                     </h2>
                                   </td>
@@ -351,10 +360,14 @@
                                       >
                                         <i class="far fa-eye"></i> View
                                       </a>
-                                      <a href="{% url 'delete-report' pk=report.report_id %}" onclick="return confirm('Are you sure you want to Delete?');" class="btn btn-sm bg-danger-light" >
-                                        <i class="fas fa-trash"></i> Delete <td>
-                                      </a>
-                                      
+                                      <a
+                                        href="{% url 'delete-report' pk=report.report_id %}"
+                                        onclick="return confirm('Are you sure you want to Delete?');"
+                                        class="btn btn-sm bg-danger-light"
+                                      >
+                                        <i class="fas fa-trash"></i> Delete
+                                        <td></td
+                                      ></a>
                                     </div>
                                   </td>
                                 </tr>
@@ -365,9 +378,6 @@
                         </div>
                       </div>
                     </div>
-                    <!-- /Medical Records Tab -->
-
-                    <!-- Billing Tab -->
                     <div id="pat_billing" class="tab-pane fade">
                       <div class="card card-table mb-0">
                         <div class="card-body">
@@ -382,11 +392,9 @@
                                   <th>Card Type</th>
                                   <th>Card Issuer</th>
                                   <th>Payment Status</th>
-                      
                                 </tr>
                               </thead>
                               <tbody>
-
                                 {% for payment in payments %}
                                 <tr>
                                   <td>
@@ -402,7 +410,10 @@
                                         />
                                       </a>
                                       <a href="doctor-profile.html"
-                                        >{{payment.appointment.doctor.name}} <span>{{payment.appointment.doctor.department}}</span></a
+                                        >{{payment.appointment.doctor.name}}
+                                        <span
+                                          >{{payment.appointment.doctor.department}}</span
+                                        ></a
                                       >
                                     </h2>
                                   </td>
@@ -413,18 +424,19 @@
                                   <td>{{payment.card_issuer}}</td>
                                   <td>
                                     {% if payment.status == 'VALID' %}
-                                    <span class="badge badge-pill bg-success-light">Success</span>
+                                    <span
+                                      class="badge badge-pill bg-success-light"
+                                      >Success</span
+                                    >
                                     {% else %}
-                                    <span class="badge badge-pill bg-warning-light">Pending</span>
+                                    <span
+                                      class="badge badge-pill bg-warning-light"
+                                      >Pending</span
+                                    >
                                     {% endif %}
                                   </td>
-                            
                                 </tr>
                                 {% endfor %}
-                          
-                             
-
-
                               </tbody>
                             </table>
                           </div>
@@ -446,28 +458,6 @@
       {% include 'footer.html' %}
       <!-- /Footer -->
     </div>
-    <!-- /Main Wrapper -->
-    <!-- <div class="modal fade" id="delete_modal" aria-hidden="true" role="dialog">
-      <div class="modal-dialog modal-dialog-centered text-center" role="document" >
-        <div class="modal-content">
-        	<div class="modal-header">
-            <h5 class="modal-title">Delete</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-            <div class="form-content p-2">
-              <h4 class="modal-title">Delete</h4>
-              <p class="mb-4">Are you sure want to delete?</p>
-              <button type="button" class="btn btn-primary">Save </button>
-              <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div> -->
-
     <!-- jQuery -->
     <script src="{% static 'MedTech-System/js/Normal/jquery.min.js' %}"></script>
 
@@ -487,17 +477,12 @@
 
     {% if messages %}
     <script>
-        {% for message in messages %}
-            $(document).ready(function () {
-                $('.toast').toast('show');
-            });
-        {% endfor %}
+      {% for message in messages %}
+          $(document).ready(function () {
+              $('.toast').toast('show');
+          });
+      {% endfor %}
     </script>
-  {% endif %}
-
-
-
+    {% endif %}
   </body>
-
-  <!-- doccure/patient-dashboard.html  30 Nov 2019 04:12:16 GMT -->
 </html>
