@@ -1,0 +1,78 @@
+{% if queryset.has_other_pages %}
+<nav aria-label="Page navigation">
+    <ul class="pagination justify-content-center">
+        {% if queryset.has_previous %}
+        <li class="page-item">
+            <a class="page-link" href="?page={{queryset.previous_page_number}}" aria-label="Previous" data-page="{{queryset.previous_page_number}}">
+                <span aria-hidden="true">&laquo;</span>
+                <span class="sr-only">Previous</span>
+            </a>
+        </li>
+        {% endif %}
+
+        {% for page in custom_range %}
+        {% if page == queryset.number %}
+        <li class="page-item active">
+            <a class="page-link" href="?page={{page}}" data-page="{{page}}">{{page}}</a>
+        </li>
+        {% else %}
+        <li class="page-item">
+            <a class="page-link" href="?page={{page}}" data-page="{{page}}">{{page}}</a>
+        </li>
+        {% endif %}
+        {% endfor %}
+
+        {% if queryset.has_next %}
+        <li class="page-item">
+            <a class="page-link" href="?page={{queryset.next_page_number}}" aria-label="Next" data-page="{{queryset.next_page_number}}">
+                <span aria-hidden="true">&raquo;</span>
+                <span class="sr-only">Next</span>
+            </a>
+        </li>
+        {% endif %}
+    </ul>
+</nav>
+{% endif %}
+
+<!-- Search + pagination together (using JS) -->
+<script type="text/javascript">
+    // GET SEARCH FORM AND PAGE LINKS
+    let searchForm = document.getElementById('searchForm');
+    let pageLinks = document.getElementsByClassName('page-link');
+
+    // ENSURE SEARCH FORM EXISTS
+    if (searchForm) {
+        for (let i = 0; pageLinks.length > i; i++) {
+            // ADD EVENTHANDLER TO EACH PAGINATION BUTTON (PAGE LINK)
+            pageLinks[i].addEventListener('click', function (e) {
+                e.preventDefault(); // PREVENT DEFAULT ACTION FROM OCCURRING
+
+                // DATA-PAGE IS A CUSTOM DATA ATTRIBUTE TO HTML ELEMENTS (DATA-PAGE WILL HOLD THE PAGE NO.)
+                let page = this.dataset.page; // GET THE DATA ATTRIBUTE FROM THE CLICKED ELEMENT (CALL PAGE IN DATA-PAGE)
+                
+                // ADD HIDDEN SEARCH INPUT FIELD TO FORM
+                searchForm.innerHTML += `<input value=${page} name="page" hidden/>`;
+                searchForm.submit(); // SUBMIT FORM
+            });
+        }
+    }
+</script>
+
+<style>
+    .pagination {
+        margin-top: 20px;
+    }
+
+    .page-item.active .page-link {
+        background-color: #007bff;
+        border-color: #007bff;
+    }
+
+    .page-link {
+        color: #007bff;
+    }
+
+    .page-link:hover {
+        color: #0056b3;
+    }
+</style>

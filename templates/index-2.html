@@ -1,0 +1,475 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <!-- doccure/index.html  30 Nov 2019 04:12:03 GMT -->
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=0"
+    />
+    <title>medico</title>
+
+    <!-- Favicons -->
+    <link
+      type="image/x-icon"
+      href="{% static 'MedTech-System/images/Normal/favicon.png' %}"
+      rel="icon"
+    />
+
+    <!-- Bootstrap CSS -->
+    <link
+      rel="stylesheet"
+      href="{% static 'MedTech-System/css/Normal/bootstrap.min.css' %}"
+    />
+
+    <!-- Fontawesome CSS -->
+    <link
+      rel="stylesheet"
+      href="{% static 'MedTech-System/plugins/Normal/fontawesome/css/fontawesome.min.css' %}"
+    />
+    <link
+      rel="stylesheet"
+      href="{% static 'MedTech-System/plugins/Normal/fontawesome/css/all.min.css' %}"
+    />
+
+    <!-- Main CSS -->
+    <link
+      rel="stylesheet"
+      href="{% static 'MedTech-System/css/Normal/style.css' %}"
+    />
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet"> 
+
+    <!-- Icon Font Stylesheet -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"/>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link href="lib/animate/animate.min.css" rel="stylesheet">
+    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Template Stylesheet -->
+    <link href="css/style.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="assets/js/html5shiv.min.js"></script>
+      <script src="assets/js/respond.min.js"></script>
+    <![endif]-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <style>
+      body{
+        background-color: white;
+      }
+      .flip-card {
+  background-color: transparent;
+  width: 290px;
+  height: 294px;
+  perspective: 1000px;
+  font-family: sans-serif;
+}
+
+.title {
+  font-size: 1.5em;
+  font-weight: 900;
+  text-align: center;
+  margin: 0;
+}
+
+.flip-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
+}
+
+.flip-card:hover .flip-card-inner {
+  transform: rotateY(180deg);
+}
+
+.flip-card-front, .flip-card-back {
+  box-shadow: 0 8px 14px 0 rgba(0,0,0,0.2);
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  border: 1px solid coral;
+  border-radius: 1rem;
+}
+
+.flip-card-front {
+  background: linear-gradient(120deg, rgb(142, 248, 182) 60%, rgb(213, 250, 213) 88%,
+     rgb(255, 211, 195) 40%, rgba(0, 0, 0, 0.603) 48%);
+  color: rgb(253, 253, 253);
+}
+
+.flip-card-back {
+  background: linear-gradient(120deg, rgb(61, 60, 60) 30%, rgb(219, 217, 216) 88%,
+     bisque 40%, rgb(142, 248, 182) 60%);
+  color: white;
+  transform: rotateY(180deg);
+}
+    </style>
+  </head>
+  <body>
+    <!-- Main Wrapper -->
+    <div class="main-wrapper">
+      <!-- Header -->
+      <header class="header">{% include 'navbar_home.html' %}</header>
+      <!-- header -->
+      <div class="header-carousel owl-carousel">
+        <div class="header-carousel-item">
+            <img style="height: 600px;" src="https://media.istockphoto.com/id/1437830105/photo/cropped-shot-of-a-female-nurse-hold-her-senior-patients-hand-giving-support-doctor-helping.jpg?s=612x612&w=0&k=20&c=oKR-00at4oXr4tY5IxzqsswaLaaPsPRkdw2MJbYHWgA=" class="img-fluid w-100" alt="Image">
+            <div class="carousel-caption d-flex flex-column align-items-start p-3" style="left: 5%;top: 20%; right: auto; text-align: left;">
+                <h5 class="text-black text-uppercase fw-bold mb-4" style="letter-spacing: 3px;">Welcome to</h5>
+                <h1 class="text-primary display-1 text-capitalize text-white mb-4">medico</h1>
+                <h2><p class="mb-5">"Smart Health at Your Fingertips"</p></h2>
+                <a class="btn btn-primary rounded-pill text-white py-3 px-5" href="https://free-frindly-chat-bot.vercel.app/chat">Virtual Doctor</a>
+            </div>
+        </div>
+    </div>
+    
+       
+    </div>
+    <!-- Carousel End -->
+</div>
+      <!-- Home Banner -->
+      <div class="container-fluid service py-5">
+        <div class="container py-5">
+            <div class="row align-items-center">
+                <div class="col-md-4 animate__animated animate__fadeInLeft" style="animation-delay: 0.5s;">
+                    <img src="https://static.vecteezy.com/system/resources/thumbnails/005/307/230/small_2x/healthcare-and-medicine-concept-smart-medical-doctor-working-with-stethoscope-at-modern-hospital-free-photo.jpg" class="img-fluid" alt="">
+                </div>
+                <div class="col-md-8 animate__animated animate__fadeInRight" style="animation-delay: 1s;">
+                    <div class="section-title mb-5">
+                        <h2 class="sub-title px-3 mb-0" style="font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif; font-size: 50px;">What We Do</h2>
+                        <p class="mb-0" style="font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; font-size: 20px;">
+                            "At medico, we leverage cutting-edge technology to provide seamless virtual health consultations, integrate IoT devices for real-time health monitoring, and ensure comprehensive care through secure and efficient healthcare solutions."
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <div style="    display: flex;
+    flex-direction: row;
+    align-content: stretch;
+    justify-content: space-evenly;">
+            <div class="flip-card">
+              <div class="flip-card-inner">
+                  <div class="flip-card-front">
+                      <p class="title">Med services</p>
+                      <p>Hover Me</p>
+                  </div>
+                  <div class="flip-card-back">
+                      <p class="title">BACK</p>
+                      <p>Leave Me</p>
+                  </div>
+              </div>
+          </div>
+          
+          <div class="flip-card">
+            <div class="flip-card-inner">
+                <div class="flip-card-front">
+                    <p class="title">Med services</p>
+                    <p>Hover Me</p>
+                </div>
+                <div class="flip-card-back">
+                    <p class="title">BACK</p>
+                    <p>Leave Me</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="flip-card">
+          <div class="flip-card-inner">
+              <div class="flip-card-front">
+                  <p class="title">Med services</p>
+                  <p>Hover Me</p>
+              </div>
+              <div class="flip-card-back">
+                  <p class="title">BACK</p>
+                  <p>Leave Me</p>
+              </div>
+          </div>
+      </div>
+    </div> <br>
+            <!-- /Search -->
+          </div>
+          <div class="home-image">
+            <img
+              src="{% static 'MedTech-System/images/Normal/p2.png' %}"
+              class="img-fluid" style="width: 100%;"
+            />
+          </div>
+        </div>
+      </section>
+      <!-- /Home Banner -->
+
+      <!-- Clinic and Specialities -->
+      <section class="section section-specialities" style="padding-top: 80px">
+        <div class="container-fluid">
+          <div class="section-header text-center">
+            <h2>Clinic and Specialities</h2>
+            <p class="sub-title">
+            </p>
+          </div>
+          <div class="row justify-content-center">
+            <div class="col-md-9">
+              <!-- Slider -->
+              <div class="specialities-slider slider">
+                <!-- Slider Item -->
+                <div class="speicality-item text-center">
+                  <div class="speicality-img">
+                    <img
+                      src="{% static 'MedTech-System/images/Normal/specialities/specialities-01.png' %}"
+                      class="img-fluid"
+                      alt="Speciality"
+                    />
+                    <span><i class="fa fa-circle" aria-hidden="true"></i></span>
+                  </div>
+                  <p>Urology</p>
+                </div>
+                <!-- /Slider Item -->
+
+                <!-- Slider Item -->
+                <div class="speicality-item text-center">
+                  <div class="speicality-img">
+                    <img
+                      src="{% static 'MedTech-System/images/Normal/specialities/specialities-02.png' %}"
+                      class="img-fluid"
+                      alt="Speciality"
+                    />
+                    <span><i class="fa fa-circle" aria-hidden="true"></i></span>
+                  </div>
+                  <p>Neurology</p>
+                </div>
+                <!-- /Slider Item -->
+
+                <!-- Slider Item -->
+                <div class="speicality-item text-center">
+                  <div class="speicality-img">
+                    <img
+                      src="{% static 'MedTech-System/images/Normal/specialities/specialities-03.png' %}"
+                      class="img-fluid"
+                      alt="Speciality"
+                    />
+                    <span><i class="fa fa-circle" aria-hidden="true"></i></span>
+                  </div>
+                  <p>Orthopedic</p>
+                </div>
+                <!-- /Slider Item -->
+
+                <!-- Slider Item -->
+                <div class="speicality-item text-center">
+                  <div class="speicality-img">
+                    <img
+                      src="{% static 'MedTech-System/images/Normal/specialities/specialities-04.png' %}"
+                      class="img-fluid"
+                      alt="Speciality"
+                    />
+                    <span><i class="fa fa-circle" aria-hidden="true"></i></span>
+                  </div>
+                  <p>Cardiologist</p>
+                </div>
+                <!-- /Slider Item -->
+
+                <!-- Slider Item -->
+                <div class="speicality-item text-center">
+                  <div class="speicality-img">
+                    <img
+                      src="{% static 'MedTech-System/images/Normal/specialities/specialities-05.png' %}"
+                      class="img-fluid"
+                      alt="Speciality"
+                    />
+                    <span><i class="fa fa-circle" aria-hidden="true"></i></span>
+                  </div>
+                  <p>Dentist</p>
+                </div>
+                <!-- /Slider Item -->
+              </div>
+              <!-- /Slider -->
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- Clinic and Specialities -->
+
+      <!-- Popular Section
+      <section class="section section-doctor">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-lg-4">
+              <div class="section-header">
+                <h2>Book Our Doctor</h2>
+                <p>From the Best</p>
+              </div>
+              <div class="about-content">
+                <p>
+                  You can book doctors from any hospital from here.
+                </p> -->
+                <!-- <p>
+                  web page editors now use Lorem Ipsum as their default model
+                  text, and a search for 'lorem ipsum' will uncover many web
+                  sites still in their infancy. Various versions have evolved
+                  over the years, sometimes
+                </p> -->
+                <!-- <a href="javascript:;">Read More..</a>
+              </div>
+            </div>
+
+
+            <div class="col-lg-8">
+              <div class="doctor-slider slider"> -->
+
+                <!-- {% for doctor in doctors %} -->
+                <!-- Doctor Widget -->
+                <!-- <div class="profile-widget">
+                  <div class="doc-img">
+                    <a href="#">
+                      <img
+                        class="img-fluid"
+                        alt="User Image"
+                        src="{{ doctor.featured_image.url }}"
+                      />
+                    </a>
+                    <a href="javascript:void(0)" class="fav-btn">
+                      <i class="far fa-bookmark"></i>
+                    </a>
+                  </div>
+                  <div class="pro-content">
+                    <h3 class="title">
+                      <a href="doctor-profile.html">{{doctor.name}}</a>
+                      <i class="fas fa-check-circle verified"></i>
+                    </h3>
+                    <p class="speciality">
+                      {{ doctor.department_name.hospital_department_name }}
+                    </p>
+                    {% comment %} <div class="rating">
+                      <i class="fas fa-star filled"></i>
+                      <i class="fas fa-star filled"></i>
+                      <i class="fas fa-star filled"></i>
+                      <i class="fas fa-star filled"></i>
+                      <i class="fas fa-star filled"></i>
+                      <span class="d-inline-block average-rating">(17)</span>
+                    </div> {% endcomment %}
+                    <ul class="available-info">
+                      <li>
+                        <i class="fas fa-map-marker-alt"></i> {{doctor.hospital_name}}
+                      </li>
+                      <li>
+                        <i class="far fa-clock"></i> {{ doctor.visiting_hour }}
+                      </li>
+                      <li>
+                        <i class="far fa-money-bill-alt"></i> Consulation fee: {{ doctor.consultation_fee }} BDT
+                        <i
+                          class="fas fa-info-circle"
+                          data-toggle="tooltip"
+                          title="Lorem Ipsum"
+                        ></i>
+                      </li>
+                    </ul>
+                    
+                  </div>
+                </div> -->
+                <!-- /Doctor Widget -->
+                <!-- {% endfor %} -->
+
+
+               
+              <!-- </div>
+            </div>
+
+          </div>
+        </div>
+      </section> -->
+      <!-- /Popular Section -->
+
+      <!-- Availabe Features -->
+      <!-- <section class="section section-features">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-md-5 features-img">
+              <img
+                src="{% static 'MedTech-System/images/Normal/pppp.jpg' %}"
+                class="img-fluid"
+                alt="Feature"
+              />
+            </div>
+            <div class="col-md-7">
+              <div class="section-header">
+                <h2 class="mt-2">Availabe Hospitals</h2>
+                <p>
+                  Here You can access multiple hospitals. You can book your appointment from
+                  your doctor & can collect all hospital infromations from here.
+                </p>
+              </div>
+              <div class="features-slider slider"> -->
+                <!-- Slider Item -->
+                <!-- {% for hospital in hospitals %} -->
+                <!-- <div class="feature-item text-center">
+                  <img
+                    src="{{ hospital.featured_image.url }}"
+                    class="img-fluid"
+                    alt="Feature"
+                  />
+                  <p>{{hospital.name}}</p>
+                </div>
+                {% endfor %} -->
+                <!-- /Slider Item -->
+
+                
+              <!-- </div>
+            </div>
+          </div>
+        </div>
+      </section> -->
+      <!-- Availabe Features -->
+
+      <!-- Footer -->
+      {% include 'footer.html' %}
+      <!-- /Footer -->
+    </div>
+    <!-- /Main Wrapper -->
+
+    <!-- jQuery -->
+    <script src="{% static 'MedTech-System/js/Normal/jquery.min.js' %}"></script>
+
+    <!-- Bootstrap Core JS -->
+    <script src="{% static 'MedTech-System/js/Normal/popper.min.js' %}"></script>
+    <script src="{% static 'MedTech-System/js/Normal/bootstrap.min.js' %}"></script>
+
+    <link
+      rel="stylesheet"
+      href="{% static 'MedTech-System/plugins/Normal/fontawesome/css/fontawesome.min.css' %}"
+    />
+    <link
+      rel="stylesheet"
+      href="{% static 'MedTech-System/plugins/Normal/fontawesome/css/all.min.css' %}"
+    />
+
+    <!-- Slick JS -->
+    <script src="{% static 'MedTech-System/Outside_assets/js/slick.js' %}"></script>
+
+    <!-- Custom JS -->
+    <script src="{% static 'MedTech-System/Outside_assets/js/script.js' %}"></script>
+  </body>
+
+  <!-- doccure/index.html  30 Nov 2019 04:12:03 GMT -->
+</html>

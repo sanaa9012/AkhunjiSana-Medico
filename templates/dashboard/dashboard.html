@@ -1,0 +1,266 @@
+{% extends 'baseindex/index.html' %}
+{% block content %}
+<!-- templates/dashboard.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body class="bg-gray-100 p-6">
+    <div class="container mx-auto">
+        <h1 class="text-4xl font-bold mb-8 text-center">Dashboard</h1>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+            <div class="bg-white p-6 rounded-lg shadow">
+                <h2 class="text-lg font-bold mb-4">Total Users</h2>
+                <p class="text-3xl">{{ num_users }}</p>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow">
+                <h2 class="text-lg font-bold mb-4">Total Patients</h2>
+                <p class="text-3xl">{{ num_patients }}</p>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow">
+                <h2 class="text-lg font-bold mb-4">Total Hospitals</h2>
+                <p class="text-3xl">{{ num_hospitals }}</p>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow">
+                <h2 class="text-lg font-bold mb-4">Total Notifications</h2>
+                <p class="text-3xl">{{ num_notifications }}</p>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+            <div class="bg-white p-6 rounded-lg shadow">
+                <h2 class="text-lg font-bold mb-4">Number of Hospitals by Type</h2>
+                <canvas id="hospitalTypeChart"></canvas>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow">
+                <h2 class="text-lg font-bold mb-4">Number of Patients by Blood Group</h2>
+                <canvas id="bloodGroupChart"></canvas>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+            <div class="bg-white p-6 rounded-lg shadow">
+                <h2 class="text-lg font-bold mb-4">Number of Notifications Over Time</h2>
+                <canvas id="notificationsChart"></canvas>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow">
+                <h2 class="text-lg font-bold mb-4">Number of Users by Type</h2>
+                <canvas id="userTypeChart"></canvas>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+            <div class="bg-white p-6 rounded-lg shadow">
+                <h2 class="text-lg font-bold mb-4">Line Chart - Hospitals in Cities</h2>
+                <canvas id="lineChart"></canvas>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow">
+                <h2 class="text-lg font-bold mb-4">Polar Area Chart - Doctors in Cities</h2>
+                <canvas id="polarAreaChart"></canvas>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+            <div class="bg-white p-6 rounded-lg shadow">
+                <h2 class="text-lg font-bold mb-4">Bubble Chart - Patients in Cities</h2>
+                <canvas id="bubbleChart"></canvas>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow">
+                <h2 class="text-lg font-bold mb-4">Disease Spread Map</h2>
+                <iframe src="{% url 'geomap' %}" width="100%" height="300px" style="border:none;"></iframe>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Generate random data
+            function generateRandomData(length, min, max) {
+                return Array.from({ length }, () => Math.floor(Math.random() * (max - min + 1)) + min);
+            }
+
+            // Hospital Type Chart
+            const hospitalTypeData = {
+                labels: ['Private', 'Public'],
+                datasets: [{
+                    label: 'Number of Hospitals',
+                    data: generateRandomData(2, 10, 50),
+                    backgroundColor: ['rgba(75, 192, 192, 0.2)', 'rgba(153, 102, 255, 0.2)'],
+                    borderColor: ['rgba(75, 192, 192, 1)', 'rgba(153, 102, 255, 1)'],
+                    borderWidth: 1
+                }]
+            };
+            const hospitalTypeConfig = {
+                type: 'bar',
+                data: hospitalTypeData,
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            };
+            new Chart(document.getElementById('hospitalTypeChart').getContext('2d'), hospitalTypeConfig);
+
+            // Blood Group Chart
+            const bloodGroupData = {
+                labels: ['A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-'],
+                datasets: [{
+                    label: 'Number of Patients',
+                    data: generateRandomData(8, 10, 100),
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)', 'rgba(54, 162, 235, 0.2)', 'rgba(255, 206, 86, 0.2)', 
+                        'rgba(75, 192, 192, 0.2)', 'rgba(153, 102, 255, 0.2)', 'rgba(255, 159, 64, 0.2)',
+                        'rgba(99, 255, 132, 0.2)', 'rgba(235, 54, 162, 0.2)'
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)', 'rgba(54, 162, 235, 1)', 'rgba(255, 206, 86, 1)', 
+                        'rgba(75, 192, 192, 1)', 'rgba(153, 102, 255, 1)', 'rgba(255, 159, 64, 1)',
+                        'rgba(99, 255, 132, 1)', 'rgba(235, 54, 162, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            };
+            const bloodGroupConfig = {
+                type: 'pie',
+                data: bloodGroupData,
+            };
+            new Chart(document.getElementById('bloodGroupChart').getContext('2d'), bloodGroupConfig);
+
+            // Notifications Over Time Chart
+            const notificationsData = {
+                labels: Array.from({ length: 30 }, (_, i) => `Day ${i + 1}`),
+                datasets: [{
+                    label: 'Number of Notifications',
+                    data: generateRandomData(30, 10, 100),
+                    backgroundColor: 'rgba(255, 159, 64, 0.2)',
+                    borderColor: 'rgba(255, 159, 64, 1)',
+                    borderWidth: 1
+                }]
+            };
+            const notificationsConfig = {
+                type: 'line',
+                data: notificationsData,
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            };
+            new Chart(document.getElementById('notificationsChart').getContext('2d'), notificationsConfig);
+
+            // User Type Chart
+            const userTypeData = {
+                labels: ['Patients', 'Doctors', 'Hospital Admins', 'Lab Workers', 'Pharmacists'],
+                datasets: [{
+                    label: 'Number of Users',
+                    data: generateRandomData(5, 10, 100),
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)', 'rgba(54, 162, 235, 0.2)', 'rgba(255, 206, 86, 0.2)', 
+                        'rgba(75, 192, 192, 0.2)', 'rgba(153, 102, 255, 0.2)'
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)', 'rgba(54, 162, 235, 1)', 'rgba(255, 206, 86, 1)', 
+                        'rgba(75, 192, 192, 1)', 'rgba(153, 102, 255, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            };
+            const userTypeConfig = {
+                type: 'doughnut',
+                data: userTypeData,
+            };
+            new Chart(document.getElementById('userTypeChart').getContext('2d'), userTypeConfig);
+
+            // Line Chart - Hospitals in Cities
+            const lineChartData = {
+                labels: ['Chennai', 'Coimbatore', 'Madurai', 'Tiruchirappalli', 'Salem'],
+                datasets: [{
+                    label: 'Hospitals',
+                    data: generateRandomData(5, 10, 50),
+                    fill: false,
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    tension: 0.1
+                }]
+            };
+            const lineChartConfig = {
+                type: 'line',
+                data: lineChartData,
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            };
+            new Chart(document.getElementById('lineChart').getContext('2d'), lineChartConfig);
+
+            // Polar Area Chart - Doctors in Cities
+            const polarAreaChartData = {
+                labels: ['Chennai', 'Coimbatore', 'Madurai', 'Tiruchirappalli', 'Salem'],
+                datasets: [{
+                    label: 'Doctors',
+                    data: generateRandomData(5, 50, 300),
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)', 'rgba(54, 162, 235, 0.2)', 'rgba(255, 206, 86, 0.2)', 
+                        'rgba(75, 192, 192, 0.2)', 'rgba(153, 102, 255, 0.2)'
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)', 'rgba(54, 162, 235, 1)', 'rgba(255, 206, 86, 1)', 
+                        'rgba(75, 192, 192, 1)', 'rgba(153, 102, 255, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            };
+            const polarAreaChartConfig = {
+                type: 'polarArea',
+                data: polarAreaChartData,
+            };
+            new Chart(document.getElementById('polarAreaChart').getContext('2d'), polarAreaChartConfig);
+
+            // Bubble Chart - Patients in Cities
+            const bubbleChartData = {
+                datasets: [{
+                    label: 'Patients',
+                    data: [
+                        { x: 0, y: 100, r: 10 },
+                        { x: 1, y: 200, r: 20 },
+                        { x: 2, y: 300, r: 30 },
+                        { x: 3, y: 400, r: 40 },
+                        { x: 4, y: 500, r: 50 },
+                    ],
+                    backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                    borderColor: 'rgba(255, 99, 132, 1)',
+                    borderWidth: 1
+                }]
+            };
+            const bubbleChartConfig = {
+                type: 'bubble',
+                data: bubbleChartData,
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        },
+                        x: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            };
+            new Chart(document.getElementById('bubbleChart').getContext('2d'), bubbleChartConfig);
+        });
+    </script>
+</body>
+</html>
+{% endblock %}
