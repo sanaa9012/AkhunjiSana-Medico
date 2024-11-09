@@ -1,6 +1,5 @@
-
 <!-- End topbar header -->
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+{% comment %} <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> {% endcomment %}
 <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 
 <div class="clearfix"></div>
@@ -22,7 +21,7 @@
     
     <div id="root"></div>
     <div>
-      <div id="buttons" style="margin-top: 19px; background: lightgrey; padding: 18px; border: 2px solid #adadad; display: flex; gap: 10px; justify-content: space-between; align-items: center;">
+      {% comment %} <div id="buttons" style="margin-top: 19px; background: lightgrey; padding: 18px; border: 2px solid #adadad; display: flex; gap: 10px; justify-content: space-between; align-items: center;">
         <div>
           <button onclick="startHeartAnimation()">Heart Rate</button>
           <button onclick="startTemperatureAnimation()">Temperature</button>
@@ -30,7 +29,7 @@
           <button type="button" onclick="openModal()">Documents</button>
         </div>
         <button onclick="close_tab()">Close</button>
-      </div>
+      </div> {% endcomment %}
       
       <div class="container mx-auto mt-10">
         <!-- Modal background -->
@@ -50,12 +49,6 @@
           </div>
         </div>
       </div>
-
-      <canvas id="heartChart" style="display: none;"></canvas>
-      <canvas id="temperatureChart" style="display: none;"></canvas>
-      <canvas id="glucoseChart" style="display: none;"></canvas>
-      
-      <div id="lastValue" style="padding: 21px; background: #dbdbdb; border: 2px solid #bbbbbb; color: black; font-size: 19px; margin-top: 17px; font-weight: 600;"></div>          
     </div>
   </div>
 </div>
@@ -72,7 +65,7 @@
 
     const roomID = getUrlParams(window.location.href)['roomID'] || Math.floor(Math.random() * 10000) + '';
     const userID = Math.floor(Math.random() * 10000) + '';
-    const userName = 'userName' + userID;
+    const userName =  userID;
     const appID = 1691259861;
     const serverSecret = 'ca978886fabe676ad89c430ab232a708';
     const kitToken = ZegoUIKitPrebuilt.generateKitTokenForTest(appID, serverSecret, roomID, userID, userName);
@@ -103,7 +96,7 @@
     });
   }
 
-  function generateHeartRate() {
+  {% comment %} function generateHeartRate() {
     return Math.floor(Math.random() * (90 - 70 + 1)) + 70;
   }
 
@@ -113,8 +106,8 @@
 
   function generateGlucoseLevel() {
     return Math.floor(Math.random() * (150 - 70 + 1)) + 70;
-  }
-
+  } {% endcomment %}
+{% comment %} 
   const heartCtx = document.getElementById('heartChart').getContext('2d');
   const heartChart = new Chart(heartCtx, {
     type: 'line',
@@ -264,9 +257,9 @@
       const lastValue = glucoseChart.data.datasets[0].data[4];
       document.getElementById('lastValue').innerHTML = 'Last Glucose Level: ' + lastValue;
     }, 5000);
-  }
+  } {% endcomment %}
 
-  function openModal() {
+  {% comment %} function openModal() {
     document.getElementById('modal').classList.remove('hidden');
     document.getElementById('modal-background').classList.remove('hidden');
   }
@@ -274,5 +267,5 @@
   function closeModal() {
     document.getElementById('modal').classList.add('hidden');
     document.getElementById('modal-background').classList.add('hidden');
-  }
+  } {% endcomment %}
 </script>
