@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Notification</title>
+</head>
+<body class="bg-[#0F172A] flex items-center justify-center min-h-screen">
+    <!-- Audio element for bell ringing sound -->
+    <audio id="bellAudio" loop>
+        <source src="{% static 'moye.mp3' %}" type="audio/mpeg">
+        <!-- Provide alternative sources for different browsers if necessary -->
+        Your browser does not support the audio element.
+    </audio>
+
+    <div class="w-[80vw] md:w-[60vw] bg-[#f4f4f4] h-[60vh] md:h-[70vh] rounded-3xl flex flex-col items-center justify-center shadow-lg">
+        <h1 class="text-4xl font-bold text-[#f8fb3e] mt-6">Reminders 🔔</h1>
+        <img src="https://static.vecteezy.com/system/resources/previews/009/855/597/non_2x/3d-notification-bell-free-png.png" alt="bell Notification" class="w-[40%] mt-4 mb-6">
+        <div class="w-[80%] text-center">
+            <p class="text-xl font-semibold">{{ msg|safe }}</p>
+        </div>
+        <!-- Button to trigger audio playback -->
+        <button onclick="playAudio()" class="invisible">Play Bell Sound</button><br>
+        <a href="/" onclick="" class="mt-8 md:mt-4 bg-[#dc2626] text-xl font-bold text-white border-2 border-[#dc2626] rounded-2xl py-2 px-8 hover:text-[#dc2626] hover:bg-[#f5a7a7] transition duration-300">Close</a>
+    </div>
+
+    <!-- Script to play audio after user interaction -->
+    <script>
+        // Play audio when the user first interacts with the page
+        document.addEventListener("mousedown", function() {
+            playAudio();
+            // Remove the event listener after the first interaction
+            document.removeEventListener("mousedown", arguments.callee);
+        });
+
+        function playAudio() {
+            var audio = document.getElementById("bellAudio");
+            if (audio) {
+                audio.play();
+            }
+        }
+    </script>
+</body>
+</html>
